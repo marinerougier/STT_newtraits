@@ -1,1 +1,1 @@
-# STT_newtraits
+# STT_PilotInfTrait
