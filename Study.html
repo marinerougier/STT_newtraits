@@ -69,11 +69,6 @@
   var prolificID = jsPsych.data.getURLVariable("PROLIFIC_PID");
   if(prolificID == null) {prolificID = "999";}
 
-  /* Material */
-  var Example = [
-    'Example_instr.png'
-  ];
-
   var Faces_female = [
 // female faces
     'Faces/Google_1_April Seaton_5_oval.jpg',
@@ -380,7 +375,7 @@ var Trait_negative = [
   /* PAIRING PROCEDURE */
 
   var Faces = _.flattenDeep([Faces_male, Faces_female]);
-  preloadimages.push(Faces, Trait_sentences_males, Trait_sentences_females, Example);
+  preloadimages.push(Faces, Trait_sentences_males, Trait_sentences_females);
 
  // putting all the information together in the "stim" object
   Faces.map(function (e) { stims.push({Faces: "<img class='paringsImgsLeft' src='" + e + "'>"}) });
