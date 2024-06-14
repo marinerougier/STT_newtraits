@@ -699,8 +699,8 @@ var scale_explo = ["0</br>Not at all", "1", "2", "3", "4", "5", "6", "7", "8", "
         },
         on_finish: function(data) {
           jsPsych.data.addProperties({
-          alike: data.Traits_rating    = JSON.parse(data.responses)["alike"];,
-          agreed: data.Traits_rating    = JSON.parse(data.responses)["agreed"];,
+          alike: data.Traits_rating    = JSON.parse(data.responses)["alike"],
+          agreed: data.Traits_rating    = JSON.parse(data.responses)["agreed"],
           });
         },
     };
