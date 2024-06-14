@@ -335,7 +335,7 @@ var Trait_new = [
     "Proud",
     "Humorous",
     "Attentive",
-    "Judgmental",
+    "Critical",
 ]
 
 var Trait_positive = [
@@ -462,7 +462,7 @@ var consent = {
     timeline_variables: stims,
     randomize_order: true,
     choices: jsPsych.NO_KEYS,
-    trial_duration: 8000, // Should be 8 seconds!!!!!!
+    trial_duration: 1000, // Should be 8 seconds!!!!!!
     post_trial_gap: 1000,
     //repetitions: 2, // total: 32 trials
     on_load: function () {
@@ -545,10 +545,10 @@ var behav_rel = {
         return html;
       },
       questions: [
-          {prompt: jsPsych.timelineVariable('Traits'),    labels: scale, required: true},
-          {prompt: jsPsych.timelineVariable('Trait_new'), labels: scale, required: true},
-          {prompt: jsPsych.timelineVariable('Trait_pos'), labels: scale, required: true},
-          {prompt: jsPsych.timelineVariable('Trait_neg'), labels: scale, required: true},
+          {prompt: jsPsych.timelineVariable('Traits'), name: 'Traits', labels: scale, required: true},
+          {prompt: jsPsych.timelineVariable('Trait_new'), name: 'Trait_new', labels: scale, required: true},
+          {prompt: jsPsych.timelineVariable('Trait_pos'), name: 'Trait_pos', labels: scale, required: true},
+          {prompt: jsPsych.timelineVariable('Trait_neg'), name: 'Trait_neg', labels: scale, required: true},
         ],
        randomize_question_order : true, // does not work !!!
        on_load: function() {
@@ -573,11 +573,10 @@ var behav_rel = {
         data.Trait_positive = jsPsych.timelineVariable('Trait_pos', true);
         data.Trait_negative = jsPsych.timelineVariable('Trait_neg', true);
         data.FacesGender = jsPsych.timelineVariable('Faces_gender', true);
-        var parsed_response  = JSON.parse(data.responses);
-        data.Traits    = parsed_response.Q0;
-        data.Trait_new    = parsed_response.Q1;
-        data.Trait_positive    = parsed_response.Q2;
-        data.Trait_negative    = parsed_response.Q3;
+        data.Traits_rating    = JSON.parse(data.responses)["Traits"];
+        data.Trait_new_rating    = JSON.parse(data.responses)["Trait_new"];
+        data.Trait_positive_rating    = JSON.parse(data.responses)["Trait_pos"];
+        data.Trait_negative_rating    = JSON.parse(data.responses)["Trait_neg"];
       },
     }]
   };
@@ -682,8 +681,8 @@ var scale_explo = ["0</br>Not at all", "1", "2", "3", "4", "5", "6", "7", "8", "
         type: 'survey-likert',
         preamble: "",
         questions: [
-          {prompt: "Do you think that the person on the photograph and the acquaintance this person described are alike (e.g., have similar personalities)? Please use the scale below to answer.", labels: scale_explo, required: true},
-          {prompt: "<br>Do you think that the person on the picture talked about a behavior that he or she agreed with? Please use the scale below to answer.", labels: scale_explo, required: true}
+          {prompt: "Do you think that the person on the photograph and the acquaintance this person described are alike (e.g., have similar personalities)? Please use the scale below to answer.", name:"alike", labels: scale_explo, required: true},
+          {prompt: "<br>Do you think that the person on the picture talked about a behavior that he or she agreed with? Please use the scale below to answer.", name:"agreed", labels: scale_explo, required: true}
         ],
         randomize_question_order: false,
         button_label: 'Continue',
@@ -700,8 +699,8 @@ var scale_explo = ["0</br>Not at all", "1", "2", "3", "4", "5", "6", "7", "8", "
         },
         on_finish: function(data) {
           jsPsych.data.addProperties({
-          alike: JSON.parse(data.responses).Q0,
-          agreed: JSON.parse(data.responses).Q1,
+          alike: data.Traits_rating    = JSON.parse(data.responses)["alike"];,
+          agreed: data.Traits_rating    = JSON.parse(data.responses)["agreed"];,
           });
         },
     };
